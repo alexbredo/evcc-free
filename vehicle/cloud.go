@@ -44,10 +44,6 @@ func NewCloudFromConfig(other map[string]interface{}) (api.Vehicle, error) {
 		return nil, err
 	}
 
-	if !sponsor.IsAuthorized() {
-		return nil, api.ErrSponsorRequired
-	}
-
 	conn, err := cloud.Connection()
 	if err != nil {
 		return nil, err

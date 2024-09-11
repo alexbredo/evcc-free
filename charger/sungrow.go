@@ -24,7 +24,6 @@ import (
 	"github.com/evcc-io/evcc/api"
 	"github.com/evcc-io/evcc/util"
 	"github.com/evcc-io/evcc/util/modbus"
-	"github.com/evcc-io/evcc/util/sponsor"
 	"github.com/volkszaehler/mbmd/meters/rs485"
 )
 
@@ -83,10 +82,6 @@ func NewSungrow(uri, device, comset string, baudrate int, proto modbus.Protocol,
 	conn, err := modbus.NewConnection(uri, device, comset, baudrate, proto, id)
 	if err != nil {
 		return nil, err
-	}
-
-	if !sponsor.IsAuthorized() {
-		return nil, api.ErrSponsorRequired
 	}
 
 	log := util.NewLogger("sungrow")
