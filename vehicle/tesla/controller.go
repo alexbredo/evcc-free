@@ -5,7 +5,6 @@ import (
 	"slices"
 
 	"github.com/evcc-io/evcc/api"
-	"github.com/evcc-io/evcc/util/sponsor"
 	"github.com/evcc-io/tesla-proxy-client"
 )
 
@@ -28,9 +27,6 @@ var _ api.CurrentController = (*Controller)(nil)
 
 // MaxCurrent implements the api.CurrentController interface
 func (v *Controller) MaxCurrent(current int64) error {
-	if !sponsor.IsAuthorized() {
-		return api.ErrSponsorRequired
-	}
 
 	return apiError(v.vehicle.SetChargingAmps(int(current)))
 }
@@ -39,9 +35,6 @@ var _ api.ChargeController = (*Controller)(nil)
 
 // ChargeEnable implements the api.ChargeController interface
 func (v *Controller) ChargeEnable(enable bool) error {
-	if !sponsor.IsAuthorized() {
-		return api.ErrSponsorRequired
-	}
 
 	var err error
 

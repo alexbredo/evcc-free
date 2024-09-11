@@ -39,7 +39,6 @@ import (
 	"github.com/evcc-io/evcc/api"
 	"github.com/evcc-io/evcc/util"
 	"github.com/evcc-io/evcc/util/request"
-	"github.com/evcc-io/evcc/util/sponsor"
 )
 
 // pulsatrix charger implementation
@@ -89,10 +88,6 @@ func NewPulsatrix(hostname string) (*Pulsatrix, error) {
 
 	if err := wb.connectWs(); err != nil {
 		return nil, err
-	}
-
-	if !sponsor.IsAuthorized() {
-		return nil, api.ErrSponsorRequired
 	}
 
 	return &wb, nil
